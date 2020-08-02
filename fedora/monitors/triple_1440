@@ -175,24 +175,6 @@
   </configuration>
   <configuration>
     <logicalmonitor>
-      <x>5120</x>
-      <y>0</y>
-      <scale>1</scale>
-      <monitor>
-        <monitorspec>
-          <connector>DP-2</connector>
-          <vendor>ACI</vendor>
-          <product>ASUS PB277</product>
-          <serial>0x0000ee37</serial>
-        </monitorspec>
-        <mode>
-          <width>2560</width>
-          <height>1440</height>
-          <rate>74.924850463867188</rate>
-        </mode>
-      </monitor>
-    </logicalmonitor>
-    <logicalmonitor>
       <x>2560</x>
       <y>0</y>
       <scale>1</scale>
@@ -207,7 +189,25 @@
         <mode>
           <width>2560</width>
           <height>1440</height>
-          <rate>119.99759674072266</rate>
+          <rate>143.99830627441406</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>5120</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-2</connector>
+          <vendor>ACI</vendor>
+          <product>ASUS PB277</product>
+          <serial>0x0000ee37</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>74.924850463867188</rate>
         </mode>
       </monitor>
     </logicalmonitor>
