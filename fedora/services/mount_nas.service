@@ -1,0 +1,9 @@
+[Unit]
+Description=Service to mount hard drive at boot
+After=multi-user.target
+
+[Service]
+ExecStart=mount -t nfs -o vers=4 192.168.0.203:nas /nas
+
+[Install]
+WantedBy=default.target

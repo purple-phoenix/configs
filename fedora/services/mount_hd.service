@@ -1,0 +1,9 @@
+[Unit]
+Description=Service to mount hard drive at boot
+After=multi-user.target
+
+[Service]
+ExecStart=mount /dev/sda1 /home/mtmccarthy/hdstorage
+
+[Install]
+WantedBy=default.target
