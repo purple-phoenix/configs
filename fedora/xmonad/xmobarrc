@@ -26,7 +26,7 @@ Config { font    = "xft:Arial:weight=bold:pixelsize=18:antialias=true:hinting=tr
 				         , "--low"      , "darkgreen"
 				         , "--normal"   , "darkorange"
 				         , "--high"     , "darkred"
-				         ] 10
+				         ] 50
                       -- Ram used number and percent
                     , Run Memory ["-t", "<fn=1>\xf233</fn> mem: <used>M (<usedratio>%)"] 20
 
@@ -37,7 +37,7 @@ Config { font    = "xft:Arial:weight=bold:pixelsize=18:antialias=true:hinting=tr
 					   , "--low"      , "darkgreen"
 					   , "--normal"   , "darkorange"
 					   , "--high"     , "darkred"
-					   ] 10
+					   ] 50
                       -- Disk space free
                     , Run DiskU [("/", "Root <free>"), ("/home", " Home <free>")] [
                                      "-L", "20", "-H", "50", "-m", "1", "-p", "3",
