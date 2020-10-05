@@ -1,38 +1,44 @@
-Config { font = "xft:Noto Sans:pixelsize=16:antialias=true:hinting=true"
-       , additionalFonts = []
-       , borderColor = "black"
-       , border = TopB
-       , bgColor = "black"
-       , fgColor = "grey"
-       , alpha = 255
-       , position = Top
-       , textOffset = -1
-       , iconOffset = -1
+-- http://projects.haskell.org/xmobar/
+-- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
+-- you can find weather location codes here: http://weather.noaa.gov/index.html
+
+Config { font    = "xft:Arial:weight=bold:pixelsize=18:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:Mononoki Nerd Font:pixelsize=11:antialias=true:hinting=true"
+                           , "xft:Mononoki Nerd Font:pixelsize=16:antialias=true:hinting=true"
+                           , "xft:FontAwesome:pixelsize=13"
+                           ]
+       , bgColor = "#282c34"
+       , fgColor = "#ff6c6b"
+       , position = OnScreen 0000 Top
        , lowerOnStart = True
-       , pickBroadest = False
-       , persistent = False
        , hideOnStart = False
-       , iconRoot = "."
        , allDesktops = True
-       , overrideRedirect = True
-       , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
-                                          "-L","18","-H","25",
-                                          "--normal","green",
-                                          "--high","red",
-                                          "--low","lightblue"] 36000
-                    , Run Network "eth0" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Network "eth1" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Cpu ["-L","3","-H","50",
-                               "--normal","green","--high","red"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
-                    , Run Swap [] 10
-                    , Run Com "uname" ["-s","-r"] "" 36000
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+       , persistent = True
+       , iconRoot = "/home/mtmccart/.xmonad/xpm/" -- default: "."
+       , commands = [ 
+                      -- Time and date
+                      Run Date "<fn=1>\xf133</fn> %b %d %Y (%H:%M)" "date" 50
+                      -- Cpu usage in percent
+                    , Run Cpu ["-t", "<fn=1>\xf108</fn> cpu: (<total>%)","-H","50","--high","red"] 20
+                      -- Ram used number and percent
+                    , Run Memory ["-t", "<fn=1>\xf233</fn> mem: <used>M (<usedratio>%)"] 20
+
+		      -- network activity monitor (dynamic interface resolution)
+		    , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+					   , "--Low"      , "1000"       -- units: B/s
+					   , "--High"     , "5000"       -- units: B/s
+					   , "--low"      , "darkgreen"
+					   , "--normal"   , "darkorange"
+					   , "--high"     , "darkred"
+					   ] 10
+                      -- Disk space free
+                    , Run DiskU [("/", "<fn=1>\xf0c7</fn> hdd: <free> free")] [] 60
+                      -- Runs custom script to check for pacman updates.
+                      -- This script is in my dotfiles repo in .local/bin.
+                    , Run Com "uname" ["-r"] "" 3600
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }\
-                    \{ <fc=#ee9a00>%date%</fc>| %EGPF% | %uname%"
+       , template = " %uname%  | %cpu% |  %memory% |  %disku% |  %dynnetwork% |  %date% "
        }
+

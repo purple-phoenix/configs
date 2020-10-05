@@ -7,6 +7,8 @@ import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 
+import XMonad.Layout.IndependentScreens
+
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 import qualified XMonad.StackSet as W
@@ -45,7 +47,9 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+--
+--withScreens makes physical workspaces which represent the workspace for each screen
+myWorkspaces    = withScreens 4 ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -135,8 +139,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+    [((m .|. modm, k), windows $ onCurrentScreen f i)
+        | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
 
