@@ -11,6 +11,7 @@ import XMonad.Layout.IndependentScreens
 
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -117,6 +118,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    -- Grabs screenshot of active screen
+    , ((modm              , xK_u), spawn "gnome-screenshot -i")
+    -- Grabs screenshot of entire screen
+    , ((modm .|. shiftMask, xK_u), spawn "gnome-screenshot -a")
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -255,7 +260,7 @@ myStartupHook = do
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = do 
+main = do
   xmproc <- spawnPipe "xmobar /home/mtmccart/.config/xmobar/xmobarrc"
   xmonad $ docks xmonad_main_args 
 
