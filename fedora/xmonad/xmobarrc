@@ -17,14 +17,21 @@ Config { font    = "xft:Arial:weight=bold:pixelsize=18:antialias=true:hinting=tr
        , iconRoot = "/home/mtmccart/.xmonad/xpm/" -- default: "."
        , commands = [ 
                       -- Time and date
-                      Run Date "<fn=1>\xf133</fn> %b %d %Y (%H:%M)" "date" 50
-                      -- Cpu usage in percent
-                    , Run Cpu ["-t", "<fn=1>\xf108</fn> cpu: (<total>%)","-H","50","--high","red"] 20
+                      Run Date "<fc=#ABABAB> %b %d %Y (%H:%M)</fc>" "date" 50
+                      
+		      -- cpu activity monitor
+		    , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
+				         , "--Low"      , "50"         -- units: %
+				         , "--High"     , "85"         -- units: %
+				         , "--low"      , "darkgreen"
+				         , "--normal"   , "darkorange"
+				         , "--high"     , "darkred"
+				         ] 10
                       -- Ram used number and percent
                     , Run Memory ["-t", "<fn=1>\xf233</fn> mem: <used>M (<usedratio>%)"] 20
 
 		      -- network activity monitor (dynamic interface resolution)
-		    , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+		    , Run DynNetwork     [ "--template" , "<dev>: UP <tx>kB/s| DOWN <rx>kB/s"
 					   , "--Low"      , "1000"       -- units: B/s
 					   , "--High"     , "5000"       -- units: B/s
 					   , "--low"      , "darkgreen"
@@ -32,13 +39,15 @@ Config { font    = "xft:Arial:weight=bold:pixelsize=18:antialias=true:hinting=tr
 					   , "--high"     , "darkred"
 					   ] 10
                       -- Disk space free
-                    , Run DiskU [("/", "<fn=1>\xf0c7</fn> hdd: <free> free")] [] 60
-                      -- Runs custom script to check for pacman updates.
+                    , Run DiskU [("/", "Root <free>"), ("/home", " Home <free>")] [
+                                     "-L", "20", "-H", "50", "-m", "1", "-p", "3",
+                                     "--normal", "grey50", "--high", "#a0522d",
+                                     "--low", "#2f4f4f"] 20
                       -- This script is in my dotfiles repo in .local/bin.
                     , Run Com "uname" ["-r"] "" 3600
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %uname%  | %cpu% |  %memory% |  %disku% |  %dynnetwork% |  %date% "
+       , template = " %uname%  | %multicpu% |  %memory% |  %disku% |  %dynnetwork% |  %date% "
        }
 
