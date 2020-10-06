@@ -4,6 +4,7 @@ import XMonad
 import Data.Monoid
 import System.Exit
 
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 
@@ -240,7 +241,7 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook xmproc = return dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn xmproc, ppTitle = xmobarColor "green" "" . shorten 50}
+myLogHook xmproc =  dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn xmproc, ppTitle = xmobarColor "green" "" . shorten 50}
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -262,7 +263,7 @@ myStartupHook = do
 --
 main = do
   xmproc <- spawnPipe "xmobar /home/mtmccart/.config/xmobar/xmobarrc"
-  xmonad $ docks xmonad_main_args 
+  xmonad $ docks (xmonad_main_args xmproc)
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
@@ -270,7 +271,7 @@ main = do
 --
 -- No need to modify this.
 --
-xmonad_main_args = def {
+xmonad_main_args = \xmproc -> def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

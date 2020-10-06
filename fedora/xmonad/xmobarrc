@@ -45,9 +45,10 @@ Config { font    = "xft:Arial:weight=bold:pixelsize=18:antialias=true:hinting=tr
                                      "--low", "#2f4f4f"] 20
                       -- This script is in my dotfiles repo in .local/bin.
                     , Run Com "uname" ["-r"] "" 3600
+                    , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %uname%  | %multicpu% |  %memory% |  %disku% |  %dynnetwork% |  %date% "
+       , template = "%StdinReader% | %uname%  | %multicpu% |  %memory% |  %disku% |  %dynnetwork% |  %date% "
        }
 
