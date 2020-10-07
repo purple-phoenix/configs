@@ -85,9 +85,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_n     ), refresh)
 
     -- Move focus to the next window
-    , ((modm,               xK_Tab   ), windows W.focusDown)
-
-    -- Move focus to the next window
     , ((modm,               xK_j     ), windows W.focusDown)
 
     -- Move focus to the previous window
@@ -150,13 +147,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
 
+--    [((m .|. modm, k), windows $ onKScreen f i )
+--        | (i, k) <- zip (workspaces' conf) (zip xK_Tab [xK_1 .. xK_9])
+--        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+--    ++
     --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r, xK_f] [0..]
+        | (key, sc) <- zip [xK_w, xK_e, xK_r, xK_f] [2, 0, 3, 1]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
+
 
 
 ------------------------------------------------------------------------
@@ -222,7 +225,9 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore 
+    , className =? "pkexec"         --> doFloat
+    ]
 
 ------------------------------------------------------------------------
 -- Event handling
