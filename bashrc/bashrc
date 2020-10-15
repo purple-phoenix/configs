@@ -85,5 +85,9 @@ if [ -f `which powerline-daemon` ]; then
   . /usr/share/powerline/bash/powerline.sh
 fi
 
+export SSLKEYLOGFILE=/home/mtmccart/ssl-key.log
+
+# Map caps lock to escape for vim
+xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
 source /home/mtmccart/github/alacritty/extra/completions/alacritty.bash
