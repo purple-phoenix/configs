@@ -16,8 +16,14 @@ fi
 
 # User specific aliases and functions
 alias connectsilabs="$HOME/github/gp-saml-gui/gp-saml-gui.py -P --clientos=Windows bos-vpn.silabs.com & >> /var/vpnlogs 2>&1"
-function connectSLABBOS {
-        eval $( $HOME/github/gp-saml-gui/gp-saml-gui.py --clientos=Windows bos-vpn.silabs.com -q ) && echo "$COOKIE" | sudo openconnect --protocol=gp -u "$USER" --os="$OS" --passwd-on-stdin --csd-wrapper=/usr/libexec/openconnect/hipreport.sh "$HOST"
+function connect_slab {
+        eval $( $HOME/github/gp-saml-gui/gp-saml-gui.py --clientos=Windows $1 -q ) && echo "$COOKIE" | sudo openconnect --protocol=gp -u "$USER" --os="$OS" --passwd-on-stdin --csd-wrapper=/usr/libexec/openconnect/hipreport.sh "$HOST"
+    }
+function connect_slab_bos {
+        connect_slab bos-vpn.silabs.com
+    }
+function connect_slab_aus {
+        connect_slab globalprotect.silabs.com
     }
 if ! [[ "$PATH" =~ "$HOME/.carg.bin/:$HOME/.cabal/bin:" ]]
 then
