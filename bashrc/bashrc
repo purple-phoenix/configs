@@ -1,5 +1,7 @@
 # .bashrc
 DISTRO="Ubuntu"
+# Debug uncomment line below. Shows every command as output and aborts on error
+#set -xe
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
@@ -17,7 +19,7 @@ fi
 # User specific aliases and functions
 alias connectsilabs="$HOME/github/gp-saml-gui/gp-saml-gui.py -P --clientos=Windows bos-vpn.silabs.com & >> /var/vpnlogs 2>&1"
 function connect_slab {
-        eval $( $HOME/github/gp-saml-gui/gp-saml-gui.py --clientos=Windows $1 -q ) && echo "$COOKIE" | sudo openconnect --protocol=gp -u "$USER" --os="$OS" --passwd-on-stdin --csd-wrapper=/usr/libexec/openconnect/hipreport.sh "$HOST"
+        eval $( $HOME/github/gp-saml-gui/gp_saml_gui.py --clientos=Windows $1 -q ) && echo "$COOKIE" | sudo openconnect --protocol=gp -u "$USER" --os="$OS" --passwd-on-stdin --csd-wrapper=/usr/libexec/openconnect/hipreport.sh "$HOST"
     }
 function connect_slab_bos {
         connect_slab bos-vpn.silabs.com
@@ -91,7 +93,7 @@ PYTHON_VERSION=3.8
 # Shell Bling
 if [[ "$DISTRO" == "Fedora" ]]; then
   if [ -f `which powerline-daemon` ]; then
-    powerline-daemon -q
+    powerline-daemon -q || true
     POWERLINE_BASH_CONTINUATION=1
     POWERLINE_BASH_SELECT=1
     . /usr/share/powerline/bash/powerline.sh
@@ -102,7 +104,7 @@ if [[ "$DISTRO" == "Ubuntu" ]]; then
   # Might need to uninstall apt python3-powerline
   # But install apt powerline
   if [ -f $HOME/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh ]; then
-    $HOME/.local/bin/powerline-daemon -q
+    $HOME/.local/bin/powerline-daemon -q || true
     POWERLINE_BASH_CONTINUATION=1
     POWERLINE_BASH_SELECT=1
     source $HOME/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
@@ -114,4 +116,5 @@ export SSLKEYLOGFILE=$HOME/ssl-key.log
 xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
 source $HOME/github/alacritty/extra/completions/alacritty.bash
-[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+# GHCUP removed for now
+#[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
