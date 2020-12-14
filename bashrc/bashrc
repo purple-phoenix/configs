@@ -17,19 +17,24 @@ fi
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-alias connectsilabs="$HOME/github/gp-saml-gui/gp-saml-gui.py -P --clientos=Windows bos-vpn.silabs.com & >> /var/vpnlogs 2>&1"
-function connect_slab {
-        eval $( $HOME/github/gp-saml-gui/gp_saml_gui.py --clientos=Windows $1 -q ) && echo "$COOKIE" | sudo openconnect --protocol=gp -u "$USER" --os="$OS" --passwd-on-stdin --csd-wrapper=/usr/libexec/openconnect/hipreport.sh "$HOST"
-    }
-function connect_slab_bos {
+vpn_cmd_1="$HOME/github/gp-saml-gui/gp_saml_gui.py --clientos=Windows"
+open_connect_cmd="sudo openconnect --protocol=gp -u $USER --os=win"
+open_connect_cmd+=" --passwd-on-stdin"
+open_connect_cmd+=" --csd-wrapper=/usr/libexec/openconnect/hipreport.sh"
+echo $open_connect_cmd
+connect_slab () {
+        vpn_cmd="${vpn_cmd_1} ${1} -q"
+        eval $($vpn_cmd)  && echo "$COOKIE" | $($open_connect_cmd $HOST)
+      }
+connect_slab_bos () {
         connect_slab bos-vpn.silabs.com
-    }
-function connect_slab_aus {
+      }
+connect_slab_aus () {
         connect_slab globalprotect.silabs.com
-    }
-function connect_slab_bud {
+      }
+connect_slab_bud () {
         connect_slab bud-vpn.silabs.com
-    }
+      }
 if ! [[ "$PATH" =~ "$HOME/.carg.bin/:$HOME/.cabal/bin:" ]]
 then
      PATH="$HOME/.cargo/bin/:$HOME/.cabal/bin/:$PATH"
@@ -103,11 +108,13 @@ fi
 if [[ "$DISTRO" == "Ubuntu" ]]; then
   # Might need to uninstall apt python3-powerline
   # But install apt powerline
-  if [ -f $HOME/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh ]; then
+  ubuntu_powerline_sh=$HOME/.local/lib/python3.8/site-packages/powerline
+  ubuntu_powerline_sh+=/bindings/bash/powerline.sh
+  if [ -f $ubuntu_powerline_sh ]; then
     $HOME/.local/bin/powerline-daemon -q || true
     POWERLINE_BASH_CONTINUATION=1
     POWERLINE_BASH_SELECT=1
-    source $HOME/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
+    source $ubuntu_powerline_sh
   fi
 fi
 export SSLKEYLOGFILE=$HOME/ssl-key.log
@@ -116,5 +123,17 @@ export SSLKEYLOGFILE=$HOME/ssl-key.log
 xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
 source $HOME/github/alacritty/extra/completions/alacritty.bash
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
 # GHCUP removed for now
-#[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+#[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ]  \
+# && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+
+
+
