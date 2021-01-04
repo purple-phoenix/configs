@@ -17,6 +17,11 @@ fi
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
+get_battery () {
+        battery_name=`upower -e | grep 'BAT'`
+        battery_level=`upower -i $battery_name | grep %`
+        echo $battery_level
+}
 vpn_cmd_1="$HOME/github/gp-saml-gui/gp_saml_gui.py --clientos=Windows"
 open_connect_cmd="sudo openconnect --protocol=gp -u $USER --os=win"
 open_connect_cmd+=" --passwd-on-stdin"
