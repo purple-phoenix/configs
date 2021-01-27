@@ -98,6 +98,7 @@ GHC_PATH=`stack path | grep compiler-bin | sed -e 's/compiler-bin: //'`
 export PATH="$PATH:$GHC_PATH"
 
 PYTHON_VERSION=3.8
+export PATH="$PATH:$HOME/anaconda3/bin"
 
 # Shell Bling
 if [[ "$DISTRO" == "Fedora" ]]; then
@@ -131,13 +132,19 @@ source $HOME/github/alacritty/extra/completions/alacritty.bash
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    #. /etc/bash_completion
+#fi
 
 # GHCUP removed for now
 #[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ]  \
 # && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
+if [[ -n $VIRTUAL_ENV ]]; then
+  echo "Sourcing"
+  #source "${VIRTUAL_ENV}/bin/activate"
+fi
 
 $HOME/.screenlayout/two_screen.sh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
