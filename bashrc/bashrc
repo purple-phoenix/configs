@@ -55,6 +55,8 @@ alias commshubup="$HOME/git/services/startup_scripts/start_commshub.sh"
 alias dni="sudo dnf install"
 alias vim="nvim"
 alias vi="nvim"
+alias GIT="cd $HOME/git"
+alias GITHUB="cd $HOME/github"
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
