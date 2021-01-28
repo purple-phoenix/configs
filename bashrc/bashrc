@@ -22,7 +22,7 @@ get_battery () {
         battery_level=`upower -i $battery_name | grep %`
         echo $battery_level
 }
-vpn_cmd_1="$HOME/github/gp-saml-gui/gp_saml_gui.py --clientos=Windows"
+vpn_cmd_1="/usr/bin/python3 $HOME/github/gp-saml-gui/gp_saml_gui.py --clientos=Windows"
 open_connect_cmd="sudo openconnect --protocol=gp -u $USER --os=win"
 open_connect_cmd+=" --passwd-on-stdin"
 open_connect_cmd+=" --csd-wrapper=/usr/libexec/openconnect/hipreport.sh"
@@ -57,6 +57,7 @@ alias vim="nvim"
 alias vi="nvim"
 alias GIT="cd $HOME/git"
 alias GITHUB="cd $HOME/github"
+alias BASHRC="cd $HOME/github/configs/bashrc"
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
@@ -100,8 +101,10 @@ GHC_PATH=`stack path | grep compiler-bin | sed -e 's/compiler-bin: //'`
 export PATH="$PATH:$GHC_PATH"
 
 PYTHON_VERSION=3.8
-export PATH="$PATH:$HOME/anaconda3/bin"
 
+# Activate conda https://askubuntu.com/questions/849470/how-do-i-activate-a-conda-environment-in-my-bashrc
+. $HOME/anaconda3/etc/profile.d/conda.sh
+conda activate
 # Shell Bling
 if [[ "$DISTRO" == "Fedora" ]]; then
   if [ -f `which powerline-daemon` ]; then
