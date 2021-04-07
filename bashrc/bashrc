@@ -132,7 +132,6 @@ export SSLKEYLOGFILE=$HOME/ssl-key.log
 # Map caps lock to escape for vim
 xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
-source $HOME/github/alacritty/extra/completions/alacritty.bash
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -157,3 +156,7 @@ ALACRITTY_PATH=$HOME/github/alacritty/target/release/
 if test -f "$ALACRITTY_PATH/alacritty"; then
   export PATH="$PATH:$ALACRITTY_PATH"
 fi
+
+source $HOME/github/alacritty/extra/completions/alacritty.bash
+
+pactl set-default-sink 1
