@@ -150,6 +150,10 @@ if [[ -n $VIRTUAL_ENV ]]; then
   #source "${VIRTUAL_ENV}/bin/activate"
 fi
 
-$HOME/.screenlayout/two_screen.sh
+#$HOME/.screenlayout/two_screen.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+ALACRITTY_PATH=$HOME/github/alacritty/target/release/
+if test -f "$ALACRITTY_PATH/alacritty"; then
+  export PATH="$PATH:$ALACRITTY_PATH"
+fi
