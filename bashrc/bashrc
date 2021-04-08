@@ -26,6 +26,7 @@ vpn_cmd_1="/usr/bin/python3 $HOME/github/gp-saml-gui/gp_saml_gui.py --clientos=W
 open_connect_cmd="sudo openconnect --protocol=gp -u $USER --os=win"
 open_connect_cmd+=" --passwd-on-stdin"
 open_connect_cmd+=" --csd-wrapper=/usr/libexec/openconnect/hipreport.sh"
+
 connect_slab () {
         vpn_cmd="${vpn_cmd_1} ${1} -q"
         eval $($vpn_cmd)  && echo "$COOKIE" | $($open_connect_cmd $HOST)
@@ -39,7 +40,12 @@ connect_slab_aus () {
 connect_slab_bud () {
         connect_slab bud-vpn.silabs.com
       }
-if ! [[ "$PATH" =~ "$HOME/.carg.bin/:$HOME/.cabal/bin:" ]]
+
+mount_share () {
+  mount_cmd="sudo mount -t cifs -o uid=1000 -o gid=1000 -o username=mmccarthy //evolv-fp01/${1} /mnt/${1}"
+  eval $mount_cmd
+     }
+if ! [[ "$PATH" =~ "$HOME/.cargo/bin/:$HOME/.cabal/bin:" ]]
 then
      PATH="$HOME/.cargo/bin/:$HOME/.cabal/bin/:$PATH"
 fi
@@ -127,6 +133,7 @@ if [[ "$DISTRO" == "Ubuntu" ]]; then
     source $ubuntu_powerline_sh
   fi
 fi
+
 export SSLKEYLOGFILE=$HOME/ssl-key.log
 
 # Map caps lock to escape for vim
@@ -152,6 +159,7 @@ fi
 $HOME/.screenlayout/two_screen.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 ALACRITTY_PATH=$HOME/github/alacritty/target/release/
 if test -f "$ALACRITTY_PATH/alacritty"; then
   export PATH="$PATH:$ALACRITTY_PATH"
@@ -159,4 +167,3 @@ fi
 
 source $HOME/github/alacritty/extra/completions/alacritty.bash
 
-pactl set-default-sink 1
