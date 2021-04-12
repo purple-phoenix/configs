@@ -1,0 +1,4 @@
+create_default_packages:
+  - pylint pytest
+  - flake8
+  - neovim
