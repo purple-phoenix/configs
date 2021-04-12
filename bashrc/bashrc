@@ -45,6 +45,12 @@ mount_share () {
   mount_cmd="sudo mount -t cifs -o uid=1000 -o gid=1000 -o username=mmccarthy //evolv-fp01/${1} /mnt/${1}"
   eval $mount_cmd
      }
+
+ git_config_evolv () {
+   eval "git config user.email 'mmccarthy@evolvtechnology.com'"
+   eval "git config user.name 'Matt McCarthy'"
+
+   }
 if ! [[ "$PATH" =~ "$HOME/.cargo/bin/:$HOME/.cabal/bin:" ]]
 then
      PATH="$HOME/.cargo/bin/:$HOME/.cabal/bin/:$PATH"
@@ -64,6 +70,8 @@ alias vi="nvim"
 alias GIT="cd $HOME/git"
 alias GITHUB="cd $HOME/github"
 alias BASHRC="cd $HOME/github/configs/bashrc"
+
+export SYNOPSIS="/mnt/Shared/R\&D/SQA/synopsis/master/synopsis.py"
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
