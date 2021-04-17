@@ -22,7 +22,7 @@ get_battery () {
         battery_level=`upower -i $battery_name | grep %`
         echo $battery_level
 }
-vpn_cmd_1="/usr/bin/python3 $HOME/github/gp-saml-gui/gp_saml_gui.py --clientos=Windows"
+vpn_cmd_1="/usr/bin/python3 $HOME/github/gp-saml-gui/gp_saml_gui.py --no-verify --clientos=Windows"
 open_connect_cmd="sudo openconnect --protocol=gp -u $USER --os=win"
 open_connect_cmd+=" --passwd-on-stdin"
 open_connect_cmd+=" --csd-wrapper=/usr/libexec/openconnect/hipreport.sh"
@@ -42,7 +42,7 @@ connect_slab_bud () {
       }
 
 connect_evolv () {
-  connect_slab "50.225.251.145"
+  eval "sudo openconnect --protocol=gp -u $USER --os=win 50.225.251.145" 
 }
 
 mount_share () {
