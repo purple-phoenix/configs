@@ -168,7 +168,7 @@ if [[ -n $VIRTUAL_ENV ]]; then
   #source "${VIRTUAL_ENV}/bin/activate"
 fi
 
-$HOME/.screenlayout/two_screen.sh
+#$HOME/.screenlayout/two_screen.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

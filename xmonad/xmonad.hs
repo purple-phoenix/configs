@@ -258,6 +258,7 @@ myLogHook xmproc =  dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn xmproc, ppT
 myStartupHook = do
          spawnOnce "nitrogen --restore &"
          spawnOnce "compton &"
+         spawnOnce "$HOME/.screenlayout/two_screen.sh"
          setWMName "LG3D" 
 
 ------------------------------------------------------------------------
