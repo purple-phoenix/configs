@@ -41,6 +41,10 @@ connect_slab_bud () {
         connect_slab bud-vpn.silabs.com
       }
 
+connect_evolv () {
+  connect_slab "50.225.251.145"
+}
+
 mount_share () {
   mount_cmd="sudo mount -t cifs -o uid=1000 -o gid=1000 -o username=mmccarthy //evolv-fp01/${1} /mnt/${1}"
   eval $mount_cmd
