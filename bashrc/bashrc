@@ -179,3 +179,4 @@ fi
 
 source $HOME/github/alacritty/extra/completions/alacritty.bash
 
+test -f ~/.git-completion.bash && . $_
