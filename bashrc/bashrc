@@ -55,6 +55,15 @@ mount_share () {
    eval "git config user.name 'Matt McCarthy'"
 
    }
+
+mic_check() {
+  filename="/tmp/test-mic.wav"
+  record_cmd="arecord -f S16_LE -d 5 -r 16000 --device='hw:$1,$2' $filename"
+  eval $record_cmd
+  playback_cmd="aplay $filename"
+  eval $playback_cmd
+  eval "rm $filename"
+}
 if ! [[ "$PATH" =~ "$HOME/.cargo/bin/:$HOME/.cabal/bin:" ]]
 then
      PATH="$HOME/.cargo/bin/:$HOME/.cabal/bin/:$PATH"
