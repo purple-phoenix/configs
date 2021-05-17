@@ -83,6 +83,8 @@ alias vi="nvim"
 alias GIT="cd $HOME/git"
 alias GITHUB="cd $HOME/github"
 alias BASHRC="cd $HOME/github/configs/bashrc"
+alias gs="git status"
+alias gc="git checkout"
 
 export SYNOPSIS="/mnt/Shared/R\&D/SQA/synopsis/master/synopsis.py"
 export EXPRESSTEST="/mnt/data1/express/ExpressTestRecords"
