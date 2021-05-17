@@ -120,6 +120,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Grabs screenshot of entire screen
     , ((modm .|. shiftMask, xK_u), spawn "gnome-screenshot -a")
 
+    -- Open configs folder in nvim
+    , ((modm              , xK_i), runInTerm "" "nvim ~/github/configs")
+
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
