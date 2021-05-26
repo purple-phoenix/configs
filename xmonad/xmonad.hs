@@ -121,8 +121,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_u), spawn "gnome-screenshot -a")
 
     -- Open configs folder in nvim
-    , ((modm              , xK_i), runInTerm "" "nvim ~/github/configs")
-
+    , ((modm              , xK_i), runInTerm "" "cd ~/github/configs && nvim") 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
@@ -137,6 +136,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    -- Start firefox
+    , ((modm              , xK_f     ), spawn "firefox")
     ]
     ++
 
@@ -158,7 +159,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r, xK_f] [2, 0, 3, 1]
+        | (key, sc) <- zip [xK_w, xK_e] [1, 0]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 
