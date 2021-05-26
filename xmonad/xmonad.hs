@@ -121,7 +121,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_u), spawn "gnome-screenshot -a")
 
     -- Open configs folder in nvim
-    , ((modm              , xK_i), runInTerm "" "cd ~/github/configs && nvim") 
+    , ((modm              , xK_i), runInTerm  "" "nvim $HOME/github/configs") 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
@@ -137,7 +137,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
     -- Start firefox
-    , ((modm              , xK_f     ), spawn "firefox")
+    , ((modm              , xK_f     ), safeSpawnProg "firefox")
     ]
     ++
 
