@@ -24,7 +24,7 @@ bash $HOMEDIR/Downloads/$CONDA_FILE -bu -p $HOMEDIR/anaconda3
 
 
 #Bling
-apt install -y powerline
+apt install -y powerline powerline-gitstatus
 
 mkdir -p $HOMEDIR/.xmonad $HOMEDIR/.config/xmobar/
 $HOMEDIR/github/configs/xmonad/setup_xmonad_config.sh
