@@ -148,8 +148,9 @@ fi
 if [[ "$DISTRO" == "Ubuntu" ]]; then
   # Might need to uninstall apt python3-powerline
   # But install apt powerline
-  ubuntu_powerline_sh=$HOME/.local/lib/python3.8/site-packages/powerline
+  ubuntu_powerline_sh=/usr/share/powerline
   ubuntu_powerline_sh+=/bindings/bash/powerline.sh
+
   if [ -f $ubuntu_powerline_sh ]; then
     $HOME/.local/bin/powerline-daemon -q || true
     POWERLINE_BASH_CONTINUATION=1
@@ -157,6 +158,7 @@ if [[ "$DISTRO" == "Ubuntu" ]]; then
     source $ubuntu_powerline_sh
   fi
 fi
+
 
 export SSLKEYLOGFILE=$HOME/ssl-key.log
 
