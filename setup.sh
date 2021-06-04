@@ -5,6 +5,10 @@ HOMEDIR=$1
 # Xmonad
 apt install -y libghc-xmonad-contrib-dev xmobar haskell-stack
 
+apt install -y dmenu
+apt install -y xterm
+apt install -y nitrogen
+
 # snap
 # https://stackoverflow.com/questions/60859806/chromeos-error-system-does-not-fully-support-snapd-cannot-mount-squashfs-imag
 apt install libsquashfuse0 squashfuse fuse
@@ -16,8 +20,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash /dev/stdin -y
 
 # Vim
 apt install -y neovim
-apt install -y dmenu
-apt install -y xterm
+
+
 
 # Conda
 CONDA_FILE=Anaconda3-2021.05-Linux-x86_64.sh
