@@ -20,7 +20,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash /dev/stdin -y
 
 # Vim
 apt install -y neovim
-
+apt install -y libclang-dev
+apt install -y openjdk-16-jdk
 
 
 # Conda
@@ -40,3 +41,11 @@ $HOMEDIR/github/configs/bashrc/set_bash.sh
 apt-get install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3
 source $HOMEDIR/.cargo/bin
 cargo install alacritty
+
+# System Control
+## Audio
+apt install pavucontrol
+
+
+# Autocompletion
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash

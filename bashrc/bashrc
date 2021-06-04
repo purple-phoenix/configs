@@ -196,3 +196,5 @@ source $HOME/github/alacritty/extra/completions/alacritty.bash
 test -f ~/.git-completion.bash && . $_
 
 source $HOME/github/z/z.sh
+
+set -o vi
