@@ -42,13 +42,17 @@ connect_slab_bud () {
       }
 
 connect_evolv () {
-  eval "sudo openconnect --protocol=gp -u $USER --os=win 50.225.251.145" 
+  eval "sudo openconnect --protocol=gp -u $USER --os=win vpn.evolvtechnology.com" 
 }
 
 mount_share () {
   mount_cmd="sudo mount -t cifs -o uid=1000 -o gid=1000 -o username=mmccarthy //evolv-fp01/${1} /mnt/${1}"
   eval $mount_cmd
      }
+
+mount_usb() {
+  eval "sudo mount /dev/sdc1 /mnt/usb"
+}
 
  git_config_evolv () {
    eval "git config user.email 'mmccarthy@evolvtechnology.com'"
@@ -58,11 +62,16 @@ mount_share () {
 
 mic_check() {
   filename="/tmp/test-mic.wav"
-  record_cmd="arecord -f S16_LE -d 5 -r 16000 --device='hw:$1,$2' $filename"
+  record_cmd="arecord -f S16_LE -d 5 -r 16000 -c 2 --device='hw:$1,$2' $filename"
   eval $record_cmd
   playback_cmd="aplay $filename"
   eval $playback_cmd
   eval "rm $filename"
+}
+
+
+tablet_analysis() {
+  eval "python /home/mmccarthy/git/express-sqa/reporting/validate_tablet_connectivity.py `pwd` $1 /home/mmccarthy/Documents"
 }
 if ! [[ "$PATH" =~ "$HOME/.cargo/bin/:$HOME/.cabal/bin:" ]]
 then
@@ -134,7 +143,7 @@ PYTHON_VERSION=3.8
 
 # Activate conda https://askubuntu.com/questions/849470/how-do-i-activate-a-conda-environment-in-my-bashrc
 . $HOME/anaconda3/etc/profile.d/conda.sh
-conda activate
+conda activate express-sqa
 # Shell Bling
 if [[ "$DISTRO" == "Fedora" ]]; then
   if [ -f `which powerline-daemon` ]; then
@@ -198,3 +207,10 @@ test -f ~/.git-completion.bash && . $_
 source $HOME/github/z/z.sh
 
 set -o vi
+
+#Evolv
+export PYTHONPATH="$PYTHONPATH:/home/mmccarthy/git/express-sqa"
+
+export DEV_LIB_STAGE_VS2017="/home/mmccarthy/Downloads/stage/stage_VS2017"
+
+alias change_line_endings="sed -i -e 's/\r$//' $1"
