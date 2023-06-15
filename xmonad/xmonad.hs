@@ -51,8 +51,8 @@ myModMask       = mod4Mask
 --
 --
 --withScreens makes physical workspaces which represent the workspace for each screen
-myWorkspaces    = ["1|JIRA","2|RamboxPro","3|Vi","4|IntelliJ","5|Firefox",
-                   "6|GarbageCollector","7","8","9"]
+myWorkspaces    = ["1|JIRA","2|Comm","3|Vi","4|VMs","5|Browsing",
+                   "6|Misc","7|Remmina","8|TeamViewer","9|Zoom"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
