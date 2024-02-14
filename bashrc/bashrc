@@ -214,3 +214,6 @@ export PYTHONPATH="$PYTHONPATH:/home/mmccarthy/git/express-sqa"
 export DEV_LIB_STAGE_VS2017="/home/mmccarthy/Downloads/stage/stage_VS2017"
 
 alias change_line_endings="sed -i -e 's/\r$//' $1"
+sshscanner() {
+  ssh -i ~/Documents/secrets/x2key admin@"$1"
+}
