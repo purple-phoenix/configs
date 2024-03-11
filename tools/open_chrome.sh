@@ -1,0 +1,2 @@
+google-chrome --new-window https://outlook.office.com/calendar/view/week https://todoist.com/app/today https://track.toggl.com/timer https://evolvma.atlassian.net/jira/software/c/projects/SQAUTO/boards/114?assignee=606b2cb8f8e477006841c1c7 &
+google-chrome --new-window https://app.circleci.com/pipelines/bitbucket/evolvmosaiq https://app.slack.com/client/T046UPD2C/D01SV61CEMB https://outlook.office.com/mail/ https://music.youtube.com/playlist?list=PL81aTkqDdgL8btUVc_cdncmZP1dqMJEA- https://mail.google.com/mail/u/0/#inbox &
