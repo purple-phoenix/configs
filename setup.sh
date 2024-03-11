@@ -44,7 +44,13 @@ cargo install alacritty
 
 # System Control
 ## Audio
-apt install pavucontrol
+apt install -y pavucontrol
+# Mounting
+apt install -y cifs-utils
+# RDP
+apt install -y remmina
+#VPN
+apt install -y openconnect
 
 
 # Autocompletion
