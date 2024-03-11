@@ -137,7 +137,7 @@ alias .5='cd ../../../../..'
 PYTHON_VERSION=3.8
 
 
-$PATH=$PATH:$HOME/anaconda3/bin
+PATH=$PATH:$HOME/anaconda3/bin
 # Activate conda https://askubuntu.com/questions/849470/how-do-i-activate-a-conda-environment-in-my-bashrc
 . $HOME/anaconda3/etc/profile.d/conda.sh
 conda activate express-sqa
