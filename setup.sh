@@ -3,7 +3,7 @@
 HOMEDIR=$1
 
 # Xmonad
-apt install -y libghc-xmonad-contrib-dev xmobar haskell-stack
+apt install -y libghc-xmonad-contrib-dev xmobar haskell-stack xmonad
 
 apt install -y dmenu
 apt install -y xterm
@@ -11,8 +11,8 @@ apt install -y nitrogen
 
 # snap
 # https://stackoverflow.com/questions/60859806/chromeos-error-system-does-not-fully-support-snapd-cannot-mount-squashfs-imag
-apt install libsquashfuse0 squashfuse fuse
-apt install snapd
+apt install libsquashfuse0 squashfuse fuse -y
+apt install snapd -y
 
 # Rust
 apt install -y curl

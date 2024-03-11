@@ -134,13 +134,10 @@ alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
 
-
-# Push GHC on path
-GHC_PATH=`stack path | grep compiler-bin | sed -e 's/compiler-bin: //'`
-export PATH="$PATH:$GHC_PATH"
-
 PYTHON_VERSION=3.8
 
+
+$PATH=$PATH:$HOME/anaconda3/bin
 # Activate conda https://askubuntu.com/questions/849470/how-do-i-activate-a-conda-environment-in-my-bashrc
 . $HOME/anaconda3/etc/profile.d/conda.sh
 conda activate express-sqa
@@ -217,3 +214,8 @@ alias change_line_endings="sed -i -e 's/\r$//' $1"
 sshscanner() {
   ssh -i ~/Documents/secrets/x2key admin@"$1"
 }
+
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+	eval `ssh-agent -s`
+	ssh-add $HOME/.ssh/*ed25519
+fi
